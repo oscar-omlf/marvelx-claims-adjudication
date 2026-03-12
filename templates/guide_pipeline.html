@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="card prose">
+  <h2>Claim processing flow</h2>
+  <ol>
+    <li><strong>Ingest claim inputs</strong> from a claim path, a full ZIP package, or a set of uploaded support files.</li>
+    <li><strong>Read source documents</strong> directly for text/markdown and via OCR for image-based evidence.</li>
+    <li><strong>Normalize multilingual text</strong> using accent stripping and lightweight concept mapping.</li>
+    <li><strong>Classify document roles</strong> into booking, medical, police, legal, description, or unknown.</li>
+    <li><strong>Extract structured facts</strong> from booking and itinerary-style files while preserving line structure.</li>
+    <li><strong>Score document signals</strong> across support, contradiction, hard invalidity, and soft uncertainty.</li>
+    <li><strong>Route the final decision</strong> according to explicit precedence in the policy engine.</li>
+    <li><strong>Persist and present the result</strong> through the stable API response shape and the internal inspection pages.</li>
+  </ol>
+  <h3>Why the extra benchmark files matter</h3>
+  <p>Claims often require both the incident evidence and the itinerary or booking markdown file. The image alone usually proves the incident; the markdown file often proves that a covered trip, date, or booking actually existed.</p>
+</section>
+{% endblock %}

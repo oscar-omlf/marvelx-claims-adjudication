@@ -1,0 +1,89 @@
+# Benchmark Evaluation
+
+- Total claims: 25
+- Strict accuracy: 96.00%
+- Relaxed accuracy: 100.00%
+
+## Confusion Matrix
+
+- APPROVE: {'APPROVE': 7}
+- DENY: {'DENY': 12, 'UNCERTAIN': 1}
+- UNCERTAIN: {'UNCERTAIN': 5}
+
+## Per-Claim Comparison
+
+- ✅ claim 1: predicted=DENY expected=DENY acceptable=None
+  - predicted explanation: a medical claim requires a supporting medical report
+  - expected explanation: medical document missing
+- ✅ claim 2: predicted=DENY expected=DENY acceptable=None
+  - predicted explanation: the claim reason does not match a covered policy category
+  - expected explanation: medical document missing, the missed the medical appointment is not covered
+- ✅ claim 3: predicted=APPROVE expected=APPROVE acceptable=None
+  - predicted explanation: booking proof is present
+  - expected explanation: None
+- ✅ claim 4: predicted=DENY expected=DENY acceptable=None
+  - predicted explanation: the patient identity is missing, redacted, or does not clearly match the booking
+  - expected explanation: name is redacted
+- ✅ claim 5: predicted=APPROVE expected=APPROVE acceptable=None
+  - predicted explanation: booking proof is present
+  - expected explanation: None
+- ✅ claim 6: predicted=UNCERTAIN expected=UNCERTAIN acceptable=None
+  - predicted explanation: the flight is still in the future, so it is not clear if the person will still be hospitalized or otherwise unable to fly
+  - expected explanation: the flight is in 2 weeks from now, it is not clear if the person will still be hospitalized or otherwise unable to fly
+- ✅ claim 7: predicted=DENY expected=DENY acceptable=None
+  - predicted explanation: the document mentions discharge but does not provide a coherent discharge date
+  - expected explanation: the document is generally suspicious: stamp with signature seems photoshopped onto a non-printed document. the document mentions that the person was 'discharged on' but does not have the date.
+- ✅ claim 8: predicted=DENY expected=DENY acceptable=None
+  - predicted explanation: medical support is provided only as plain text rather than an official medical image or scanned record
+  - expected explanation: the medical document is in text form. this MUST be denied.
+- ✅ claim 9: predicted=APPROVE expected=APPROVE acceptable=None
+  - predicted explanation: booking proof is present
+  - expected explanation: None
+- ✅ claim 10: predicted=DENY expected=DENY acceptable=None
+  - predicted explanation: the medical document indicates the traveler is healthy or fit rather than unable to travel
+  - expected explanation: the medical certificate states the person is healthy
+- ✅ claim 11: predicted=APPROVE expected=APPROVE acceptable=None
+  - predicted explanation: booking proof is present
+  - expected explanation: None
+- ✅ claim 12: predicted=APPROVE expected=APPROVE acceptable=None
+  - predicted explanation: booking proof is present
+  - expected explanation: None
+- ✅ claim 13: predicted=UNCERTAIN expected=UNCERTAIN acceptable=DENY
+  - predicted explanation: the document has a suspicious date pattern that does not line up cleanly with the travel incident
+  - expected explanation: suspicious dating on the document (17/11/2023 stamp)
+- ✅ claim 14: predicted=DENY expected=DENY acceptable=None
+  - predicted explanation: theft-related claims require a police report or equivalent acknowledgement
+  - expected explanation: medical document states the patient is healthy
+- ✅ claim 15: predicted=DENY expected=DENY acceptable=None
+  - predicted explanation: the claim reason does not match a covered policy category
+  - expected explanation: the name is obscured in the medical document and visible initials do not correspond
+- ✅ claim 16: predicted=APPROVE expected=APPROVE acceptable=None
+  - predicted explanation: booking proof is present
+  - expected explanation: None
+- ✅ claim 17: predicted=DENY expected=DENY acceptable=None
+  - predicted explanation: the medical document indicates the traveler is healthy or fit rather than unable to travel
+  - expected explanation: documentation states the claimant is in good condition, lacks a signature
+- ✅ claim 18: predicted=UNCERTAIN expected=DENY acceptable=UNCERTAIN
+  - predicted explanation: only a low-readability picture was attached instead of a clear medical certificate
+  - expected explanation: a picture is attached instead of the medical certificate
+- ✅ claim 19: predicted=APPROVE expected=APPROVE acceptable=None
+  - predicted explanation: booking proof is present
+  - expected explanation: None
+- ✅ claim 20: predicted=UNCERTAIN expected=UNCERTAIN acceptable=DENY
+  - predicted explanation: the document looks like an administrative hospital note rather than a signed physician certificate
+  - expected explanation: no signature on the medical certificate
+- ✅ claim 21: predicted=DENY expected=DENY acceptable=UNCERTAIN
+  - predicted explanation: a medical claim requires a supporting medical report
+  - expected explanation: no supporting documentation provided
+- ✅ claim 22: predicted=DENY expected=DENY acceptable=None
+  - predicted explanation: the narrative itself says the person was healthy or fit
+  - expected explanation: the medical certificate states the person is healthy
+- ✅ claim 23: predicted=UNCERTAIN expected=UNCERTAIN acceptable=DENY
+  - predicted explanation: the document contains a later year stamp that makes its dating somewhat suspicious
+  - expected explanation: the document has weird dating (2016 in the bottom)
+- ✅ claim 24: predicted=UNCERTAIN expected=UNCERTAIN acceptable=APPROVE
+  - predicted explanation: the medical consultation occurred after the travel date according to the narrative
+  - expected explanation: minor date problem - appointment is 3 days after the flight
+- ✅ claim 25: predicted=DENY expected=DENY acceptable=None
+  - predicted explanation: a medical claim requires a supporting medical report
+  - expected explanation: medical document missing

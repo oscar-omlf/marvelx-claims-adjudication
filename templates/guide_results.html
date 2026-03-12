@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="card prose">
+  <h2>Benchmark workflow & QA artifacts</h2>
+  <p>QA is run as a two-step workflow so inference stays clean and answer files are used only after predictions have been written.</p>
+  <h3>Operational sequence</h3>
+  <ol>
+    <li>Run <code>process_benchmark.py</code> to generate predictions.</li>
+    <li>Run <code>evaluate_benchmark.py</code> to compare those predictions with stored benchmark answers.</li>
+    <li>Inspect strict and relaxed accuracy, confusion shape, and per-claim diffs in the generated artifacts.</li>
+  </ol>
+  {% if evaluation %}
+  <h3>Current repository QA snapshot</h3>
+  <div class="grid grid-3">
+    <div class="metric small"><span class="metric-label">Total claims</span><span class="metric-value">{{ evaluation.total }}</span></div>
+    <div class="metric small"><span class="metric-label">Strict accuracy</span><span class="metric-value">{{ (evaluation.strict_accuracy * 100)|round(1) }}%</span></div>
+    <div class="metric small"><span class="metric-label">Relaxed accuracy</span><span class="metric-value">{{ (evaluation.relaxed_accuracy * 100)|round(1) }}%</span></div>
+  </div>
+  {% else %}
+  <p>No evaluation artifact is currently loaded in <code>results/evaluation.json</code>.</p>
+  {% endif %}
+</section>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="card prose">
+  <h2>App & service architecture</h2>
+  <p>The product surface is intentionally thin: the browser UI and documentation routes sit on top of a stable deterministic pipeline so the operational experience can improve without destabilizing adjudication behavior.</p>
+  <h3>App shell</h3>
+  <ul>
+    <li><strong>FastAPI route layer</strong> exposes JSON endpoints and internal HTML pages from a single entrypoint.</li>
+    <li><strong>Template layer</strong> provides landing, intake, processed-claims, QA, and guide pages.</li>
+    <li><strong>Session store</strong> keeps processed claims available for immediate inspection in the UI.</li>
+  </ul>
+  <h3>Stable processing core</h3>
+  <ul>
+    <li><strong>ClaimProcessor</strong> owns orchestration across loading, reading, normalization, classification, and policy assessment.</li>
+    <li><strong>PolicyEngine</strong> turns extracted document signals into deterministic final decisions.</li>
+    <li><strong>Payload generator</strong> adapts internal claim assessments into the stable API response shape.</li>
+  </ul>
+  <h3>Artifacts and supporting material</h3>
+  <ul>
+    <li><strong>results/</strong> contains predictions and evaluation artifacts used by the QA views.</li>
+    <li><strong>docs/</strong> contains markdown notes mirrored by the guide portal.</li>
+    <li><strong>.ocr_cache/</strong> speeds up repeated OCR-heavy benchmark runs.</li>
+  </ul>
+</section>
+{% endblock %}

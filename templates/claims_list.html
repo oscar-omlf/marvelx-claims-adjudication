@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="card">
+  <div class="split">
+    <div>
+      <h2>Processed claims</h2>
+      <p class="lede">Claims currently available in the application store for internal inspection.</p>
+    </div>
+    <a class="button" href="/submit">Submit another claim</a>
+  </div>
+  {% if claims %}
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Claim</th>
+          <th>Decision</th>
+          <th>Coverage type</th>
+          <th>Confidence</th>
+          <th>Payout</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for claim in claims %}
+        <tr>
+          <td><a href="/claims-ui/{{ claim.claim_id }}">{{ claim.claim_id }}</a></td>
+          <td><span class="decision-pill decision-{{ claim.decision|lower }}">{{ claim.decision }}</span></td>
+          <td>{{ claim.coverage_type }}</td>
+          <td>{{ (claim.confidence * 100)|round(1) }}%</td>
+          <td>{{ claim.payout_estimate if claim.payout_estimate is not none else '-' }} {{ claim.currency or '' }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% else %}
+  <div class="empty-state">
+    <h3>No processed claims yet</h3>
+    <p>Submit a claim through the browser UI or the JSON API to populate this view.</p>
+  </div>
+  {% endif %}
+</section>
+{% endblock %}

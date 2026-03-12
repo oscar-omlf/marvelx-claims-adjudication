@@ -1,0 +1,5 @@
+{
+  "decision": "UNCERTAIN",
+  "explanation": "no signature on the medical certificate",
+  "acceptable_decision": "DENY"
+}

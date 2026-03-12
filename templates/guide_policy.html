@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="card prose">
+  <h2>Decision policy & verification rules</h2>
+  <p>The routing layer treats claim adjudication as a document-grounded decision problem, not a free-form text classification task.</p>
+  <h3>Signal groups used by the router</h3>
+  <ul>
+    <li><strong>Support</strong>: evidence that positively supports a covered reason.</li>
+    <li><strong>Contradiction</strong>: authoritative evidence that defeats the claimed covered reason.</li>
+    <li><strong>Hard invalidity</strong>: missing or unusable proof that should normally force denial.</li>
+    <li><strong>Soft uncertainty</strong>: plausible but unresolved evidence that should avoid automatic approval.</li>
+  </ul>
+  <h3>Decision precedence</h3>
+  <ol>
+    <li>Policy exclusion or uncovered reason</li>
+    <li>Authoritative contradiction</li>
+    <li>Hard invalidity or missing required proof</li>
+    <li>Clear support without blockers</li>
+    <li>Plausible support with unresolved uncertainty</li>
+  </ol>
+  <h3>Why medical files receive extra scrutiny</h3>
+  <p>Medical claims are especially sensitive to the difference between genuine support, contradiction, and weak documentation. That is why the policy layer gives medical documents a deeper verification pass than generic support files.</p>
+</section>
+{% endblock %}

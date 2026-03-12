@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="hero card card-gradient">
+  <div>
+    <div class="eyebrow">Claims operations</div>
+    <h2>Internal claims intake, deterministic decisioning, and QA visibility.</h2>
+    <p>
+      Use this console to submit claims, inspect routed decisions, review benchmark outputs,
+      and navigate the engineering documentation that explains how the system behaves in production-like workflows.
+    </p>
+    <div class="actions">
+      <a class="button" href="/submit">Open claim intake</a>
+      <a class="button button-secondary" href="/claims-ui">View processed claims</a>
+      <a class="button button-secondary" href="/guide">Read engineering guide</a>
+    </div>
+  </div>
+  <div class="hero-panel">
+    <div class="metric">
+      <span class="metric-label">Processed claims in memory</span>
+      <span class="metric-value">{{ processed_claim_count }}</span>
+    </div>
+    <div class="metric">
+      <span class="metric-label">QA artifact status</span>
+      <span class="metric-value">{{ "Available" if qa_available else "Not loaded" }}</span>
+    </div>
+    {% if qa_summary %}
+    <div class="metric">
+      <span class="metric-label">Strict accuracy</span>
+      <span class="metric-value">{{ (qa_summary.strict_accuracy * 100)|round(1) }}%</span>
+    </div>
+    <div class="metric">
+      <span class="metric-label">Relaxed accuracy</span>
+      <span class="metric-value">{{ (qa_summary.relaxed_accuracy * 100)|round(1) }}%</span>
+    </div>
+    {% endif %}
+  </div>
+</section>
+
+<section class="grid grid-3">
+  <article class="card">
+    <h3>Claim intake</h3>
+    <p>Submit a claim from pasted narrative text, an on-disk claim path, or a packaged ZIP of the full claim folder.</p>
+    <a class="text-link" href="/submit">Go to intake →</a>
+  </article>
+  <article class="card">
+    <h3>Decision inspection</h3>
+    <p>Review decision, confidence, payout estimate, extracted facts, warnings, and policy-summary output for processed claims.</p>
+    <a class="text-link" href="/claims-ui">Open processed claims →</a>
+  </article>
+  <article class="card">
+    <h3>Internal documentation</h3>
+    <p>Browse the architecture, claim-flow notes, module boundaries, and decision-policy reference used by the engineering team.</p>
+    <a class="text-link" href="/guide">Open guide portal →</a>
+  </article>
+</section>
+
+<section class="grid grid-2">
+  <article class="card">
+    <h3>What this console is for</h3>
+    <ul class="feature-list">
+      <li>Rapid internal testing of claim scenarios with realistic document bundles</li>
+      <li>Operational visibility into routing, confidence, and QA artifact generation</li>
+      <li>Deterministic behavior with inspectable policy and verification rules</li>
+      <li>Low-friction onboarding for new engineers and stakeholders reviewing system behavior</li>
+    </ul>
+  </article>
+  <article class="card">
+    <h3>Quick links</h3>
+    <div class="link-grid">
+      <a class="mini-link" href="/docs"><strong>Swagger UI</strong><span>Live endpoint reference and request examples.</span></a>
+      <a class="mini-link" href="/redoc"><strong>ReDoc</strong><span>Alternative API reference view.</span></a>
+      <a class="mini-link" href="/guide/architecture"><strong>App & service architecture</strong><span>How the UI shell sits on top of the stable pipeline.</span></a>
+      <a class="mini-link" href="/guide/results"><strong>Benchmark workflow</strong><span>How QA artifacts are generated and read.</span></a>
+    </div>
+  </article>
+</section>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="card prose">
+  <h2>Module map & ownership</h2>
+  <table>
+    <thead>
+      <tr><th>Module</th><th>Operational responsibility</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><code>app/main.py</code></td><td>FastAPI entrypoint, human-facing routes, claim intake wrapper, and shared template context.</td></tr>
+      <tr><td><code>src/claims_pipeline/orchestrator.py</code></td><td>High-level coordination across document reading, normalization, classification, and policy evaluation.</td></tr>
+      <tr><td><code>src/claims_pipeline/policy/engine.py</code></td><td>Deterministic decision routing, signal precedence, confidence assignment, and payout estimation.</td></tr>
+      <tr><td><code>src/claims_pipeline/documents/readers.py</code></td><td>Raw file access, OCR, and OCR-cache support for repeated runs.</td></tr>
+      <tr><td><code>src/claims_pipeline/extraction/parsers.py</code></td><td>Booking-line parsing, dates, amounts, and document-field helpers.</td></tr>
+      <tr><td><code>src/claims_pipeline/storage.py</code></td><td>In-memory storage for processed claims shown in the UI.</td></tr>
+      <tr><td><code>scripts/process_benchmark.py</code></td><td>Inference over the benchmark dataset.</td></tr>
+      <tr><td><code>scripts/evaluate_benchmark.py</code></td><td>Post-inference evaluation against answer files and QA artifact generation.</td></tr>
+    </tbody>
+  </table>
+</section>
+{% endblock %}

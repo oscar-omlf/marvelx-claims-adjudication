@@ -1,0 +1,5 @@
+{
+  "decision": "UNCERTAIN",
+  "explanation": "minor date problem - appointment is 3 days after the flight",
+  "acceptable_decision": "APPROVE"
+}

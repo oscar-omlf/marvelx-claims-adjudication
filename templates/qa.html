@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="card">
+  <h2>Benchmark & QA</h2>
+  <p class="lede">Internal quality summary based on the repository evaluation artifacts.</p>
+  {% if evaluation %}
+  <div class="grid grid-3">
+    <div class="metric"><span class="metric-label">Total claims</span><span class="metric-value">{{ evaluation.total }}</span></div>
+    <div class="metric"><span class="metric-label">Strict accuracy</span><span class="metric-value">{{ (evaluation.strict_accuracy * 100)|round(1) }}%</span></div>
+    <div class="metric"><span class="metric-label">Relaxed accuracy</span><span class="metric-value">{{ (evaluation.relaxed_accuracy * 100)|round(1) }}%</span></div>
+  </div>
+  <div class="grid grid-2">
+    <article class="card subcard">
+      <h3>Confusion matrix</h3>
+      <pre>{{ evaluation.confusion_matrix | tojson(indent=2) }}</pre>
+    </article>
+    <article class="card subcard">
+      <h3>Artifacts</h3>
+      <ul class="feature-list compact">
+        <li><code>results/predictions.jsonl</code></li>
+        <li><code>results/evaluation.json</code></li>
+        <li><code>results/evaluation.md</code></li>
+      </ul>
+      <a class="text-link" href="/guide/results">Open QA workflow guide →</a>
+    </article>
+  </div>
+  {% else %}
+  <div class="empty-state">
+    <h3>No QA artifacts detected</h3>
+    <p>Generate benchmark outputs through the scripts in <code>scripts/</code> and reload this page.</p>
+  </div>
+  {% endif %}
+</section>
+{% endblock %}

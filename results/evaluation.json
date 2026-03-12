@@ -1,0 +1,269 @@
+{
+  "total": 25,
+  "strict_accuracy": 0.96,
+  "relaxed_accuracy": 1.0,
+  "confusion_matrix": {
+    "DENY": {
+      "DENY": 12,
+      "UNCERTAIN": 1
+    },
+    "APPROVE": {
+      "APPROVE": 7
+    },
+    "UNCERTAIN": {
+      "UNCERTAIN": 5
+    }
+  },
+  "per_claim": [
+    {
+      "claim": "claim 1",
+      "predicted": "DENY",
+      "expected": "DENY",
+      "acceptable_decision": null,
+      "strict_match": true,
+      "relaxed_match": true,
+      "prediction_explanation": "a medical claim requires a supporting medical report",
+      "expected_explanation": "medical document missing"
+    },
+    {
+      "claim": "claim 2",
+      "predicted": "DENY",
+      "expected": "DENY",
+      "acceptable_decision": null,
+      "strict_match": true,
+      "relaxed_match": true,
+      "prediction_explanation": "the claim reason does not match a covered policy category",
+      "expected_explanation": "medical document missing, the missed the medical appointment is not covered"
+    },
+    {
+      "claim": "claim 3",
+      "predicted": "APPROVE",
+      "expected": "APPROVE",
+      "acceptable_decision": null,
+      "strict_match": true,
+      "relaxed_match": true,
+      "prediction_explanation": "booking proof is present",
+      "expected_explanation": null
+    },
+    {
+      "claim": "claim 4",
+      "predicted": "DENY",
+      "expected": "DENY",
+      "acceptable_decision": null,
+      "strict_match": true,
+      "relaxed_match": true,
+      "prediction_explanation": "the patient identity is missing, redacted, or does not clearly match the booking",
+      "expected_explanation": "name is redacted"
+    },
+    {
+      "claim": "claim 5",
+      "predicted": "APPROVE",
+      "expected": "APPROVE",
+      "acceptable_decision": null,
+      "strict_match": true,
+      "relaxed_match": true,
+      "prediction_explanation": "booking proof is present",
+      "expected_explanation": null
+    },
+    {
+      "claim": "claim 6",
+      "predicted": "UNCERTAIN",
+      "expected": "UNCERTAIN",
+      "acceptable_decision": null,
+      "strict_match": true,
+      "relaxed_match": true,
+      "prediction_explanation": "the flight is still in the future, so it is not clear if the person will still be hospitalized or otherwise unable to fly",
+      "expected_explanation": "the flight is in 2 weeks from now, it is not clear if the person will still be hospitalized or otherwise unable to fly"
+    },
+    {
+      "claim": "claim 7",
+      "predicted": "DENY",
+      "expected": "DENY",
+      "acceptable_decision": null,
+      "strict_match": true,
+      "relaxed_match": true,
+      "prediction_explanation": "the document mentions discharge but does not provide a coherent discharge date",
+      "expected_explanation": "the document is generally suspicious: stamp with signature seems photoshopped onto a non-printed document. the document mentions that the person was 'discharged on' but does not have the date."
+    },
+    {
+      "claim": "claim 8",
+      "predicted": "DENY",
+      "expected": "DENY",
+      "acceptable_decision": null,
+      "strict_match": true,
+      "relaxed_match": true,
+      "prediction_explanation": "medical support is provided only as plain text rather than an official medical image or scanned record",
+      "expected_explanation": "the medical document is in text form. this MUST be denied."
+    },
+    {
+      "claim": "claim 9",
+      "predicted": "APPROVE",
+      "expected": "APPROVE",
+      "acceptable_decision": null,
+      "strict_match": true,
+      "relaxed_match": true,
+      "prediction_explanation": "booking proof is present",
+      "expected_explanation": null
+    },
+    {
+      "claim": "claim 10",
+      "predicted": "DENY",
+      "expected": "DENY",
+      "acceptable_decision": null,
+      "strict_match": true,
+      "relaxed_match": true,
+      "prediction_explanation": "the medical document indicates the traveler is healthy or fit rather than unable to travel",
+      "expected_explanation": "the medical certificate states the person is healthy"
+    },
+    {
+      "claim": "claim 11",
+      "predicted": "APPROVE",
+      "expected": "APPROVE",
+      "acceptable_decision": null,
+      "strict_match": true,
+      "relaxed_match": true,
+      "prediction_explanation": "booking proof is present",
+      "expected_explanation": null
+    },
+    {
+      "claim": "claim 12",
+      "predicted": "APPROVE",
+      "expected": "APPROVE",
+      "acceptable_decision": null,
+      "strict_match": true,
+      "relaxed_match": true,
+      "prediction_explanation": "booking proof is present",
+      "expected_explanation": null
+    },
+    {
+      "claim": "claim 13",
+      "predicted": "UNCERTAIN",
+      "expected": "UNCERTAIN",
+      "acceptable_decision": "DENY",
+      "strict_match": true,
+      "relaxed_match": true,
+      "prediction_explanation": "the document has a suspicious date pattern that does not line up cleanly with the travel incident",
+      "expected_explanation": "suspicious dating on the document (17/11/2023 stamp)"
+    },
+    {
+      "claim": "claim 14",
+      "predicted": "DENY",
+      "expected": "DENY",
+      "acceptable_decision": null,
+      "strict_match": true,
+      "relaxed_match": true,
+      "prediction_explanation": "theft-related claims require a police report or equivalent acknowledgement",
+      "expected_explanation": "medical document states the patient is healthy"
+    },
+    {
+      "claim": "claim 15",
+      "predicted": "DENY",
+      "expected": "DENY",
+      "acceptable_decision": null,
+      "strict_match": true,
+      "relaxed_match": true,
+      "prediction_explanation": "the claim reason does not match a covered policy category",
+      "expected_explanation": "the name is obscured in the medical document and visible initials do not correspond"
+    },
+    {
+      "claim": "claim 16",
+      "predicted": "APPROVE",
+      "expected": "APPROVE",
+      "acceptable_decision": null,
+      "strict_match": true,
+      "relaxed_match": true,
+      "prediction_explanation": "booking proof is present",
+      "expected_explanation": null
+    },
+    {
+      "claim": "claim 17",
+      "predicted": "DENY",
+      "expected": "DENY",
+      "acceptable_decision": null,
+      "strict_match": true,
+      "relaxed_match": true,
+      "prediction_explanation": "the medical document indicates the traveler is healthy or fit rather than unable to travel",
+      "expected_explanation": "documentation states the claimant is in good condition, lacks a signature"
+    },
+    {
+      "claim": "claim 18",
+      "predicted": "UNCERTAIN",
+      "expected": "DENY",
+      "acceptable_decision": "UNCERTAIN",
+      "strict_match": false,
+      "relaxed_match": true,
+      "prediction_explanation": "only a low-readability picture was attached instead of a clear medical certificate",
+      "expected_explanation": "a picture is attached instead of the medical certificate"
+    },
+    {
+      "claim": "claim 19",
+      "predicted": "APPROVE",
+      "expected": "APPROVE",
+      "acceptable_decision": null,
+      "strict_match": true,
+      "relaxed_match": true,
+      "prediction_explanation": "booking proof is present",
+      "expected_explanation": null
+    },
+    {
+      "claim": "claim 20",
+      "predicted": "UNCERTAIN",
+      "expected": "UNCERTAIN",
+      "acceptable_decision": "DENY",
+      "strict_match": true,
+      "relaxed_match": true,
+      "prediction_explanation": "the document looks like an administrative hospital note rather than a signed physician certificate",
+      "expected_explanation": "no signature on the medical certificate"
+    },
+    {
+      "claim": "claim 21",
+      "predicted": "DENY",
+      "expected": "DENY",
+      "acceptable_decision": "UNCERTAIN",
+      "strict_match": true,
+      "relaxed_match": true,
+      "prediction_explanation": "a medical claim requires a supporting medical report",
+      "expected_explanation": "no supporting documentation provided"
+    },
+    {
+      "claim": "claim 22",
+      "predicted": "DENY",
+      "expected": "DENY",
+      "acceptable_decision": null,
+      "strict_match": true,
+      "relaxed_match": true,
+      "prediction_explanation": "the narrative itself says the person was healthy or fit",
+      "expected_explanation": "the medical certificate states the person is healthy"
+    },
+    {
+      "claim": "claim 23",
+      "predicted": "UNCERTAIN",
+      "expected": "UNCERTAIN",
+      "acceptable_decision": "DENY",
+      "strict_match": true,
+      "relaxed_match": true,
+      "prediction_explanation": "the document contains a later year stamp that makes its dating somewhat suspicious",
+      "expected_explanation": "the document has weird dating (2016 in the bottom)"
+    },
+    {
+      "claim": "claim 24",
+      "predicted": "UNCERTAIN",
+      "expected": "UNCERTAIN",
+      "acceptable_decision": "APPROVE",
+      "strict_match": true,
+      "relaxed_match": true,
+      "prediction_explanation": "the medical consultation occurred after the travel date according to the narrative",
+      "expected_explanation": "minor date problem - appointment is 3 days after the flight"
+    },
+    {
+      "claim": "claim 25",
+      "predicted": "DENY",
+      "expected": "DENY",
+      "acceptable_decision": null,
+      "strict_match": true,
+      "relaxed_match": true,
+      "prediction_explanation": "a medical claim requires a supporting medical report",
+      "expected_explanation": "medical document missing"
+    }
+  ]
+}

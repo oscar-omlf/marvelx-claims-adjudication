@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="card">
+  <h2>Claim intake</h2>
+  <p class="lede">
+    Preferred benchmark workflow: paste the claim description, then upload <strong>every original claim file except <code>answer.json</code></strong>.
+    That includes the medical or incident evidence <em>and</em> the extra itinerary or booking markdown file such as <code>supporting1.md</code>,
+    <code>internal flight data.md</code>, <code>internal ticket data.md</code>, or <code>internal train data.md</code>.
+  </p>
+  {% if error %}
+  <div class="alert alert-error">{{ error }}</div>
+  {% endif %}
+  {% if helper_note %}
+  <div class="alert alert-info">{{ helper_note }}</div>
+  {% endif %}
+  <div class="grid grid-2">
+    <div class="card subcard">
+      <h3>Recommended input patterns</h3>
+      <ul class="feature-list compact">
+        <li><strong>Best option:</strong> upload a ZIP containing the full claim folder except <code>answer.json</code>.</li>
+        <li><strong>Manual option:</strong> paste the description and upload all support files individually.</li>
+        <li><strong>Power-user option:</strong> use <code>claim_path</code> in metadata JSON to point to an on-disk claim directory.</li>
+      </ul>
+    </div>
+    <div class="card subcard">
+      <h3>Do not exclude the extra markdown file</h3>
+      <p class="lede">
+        Those files often carry the booking proof, travel date, route, operator, or passenger data that the pipeline needs.
+        If you only upload the certificate or image evidence, the claim can fail for missing booking proof.
+      </p>
+    </div>
+  </div>
+  <form class="form" action="/submit" method="post" enctype="multipart/form-data">
+    <div class="form-grid">
+      <label>
+        <span>Claim ID</span>
+        <input type="text" name="claim_id" value="{{ submitted.claim_id if submitted else '' }}" placeholder="Optional internal identifier" />
+      </label>
+      <label>
+        <span>Metadata JSON</span>
+        <textarea name="metadata_json" rows="8" placeholder='{"claim_path": "/absolute/path/to/claim 13"}'>{{ submitted.metadata_json if submitted else '{
+  "inline_documents": {}
+}' }}</textarea>
+      </label>
+    </div>
+    <label>
+      <span>Claim description</span>
+      <textarea name="description" rows="12" placeholder="Paste the claimant narrative or incident summary here.">{{ submitted.description if submitted else '' }}</textarea>
+    </label>
+    <div class="form-grid">
+      <label>
+        <span>Claim package ZIP (recommended)</span>
+        <input type="file" name="claim_package" accept=".zip" />
+        <small>Upload a packaged claim folder when you want the safest benchmark-style intake path.</small>
+      </label>
+      <label>
+        <span>Supporting files</span>
+        <input type="file" name="supporting_files" multiple />
+        <small>Upload all supporting files individually if you are not using a ZIP package.</small>
+      </label>
+    </div>
+    <div class="actions">
+      <button class="button" type="submit">Process claim</button>
+      <a class="button button-secondary" href="/docs#/default/submit_claim_claims_post">Open API endpoint docs</a>
+    </div>
+  </form>
+</section>
+
+{% if result %}
+<section class="card">
+  <div class="result-header">
+    <div>
+      <div class="eyebrow">Decision result</div>
+      <h2>{{ result.claim_id }}</h2>
+    </div>
+    <span class="decision-pill decision-{{ result.decision|lower }}">{{ result.decision }}</span>
+  </div>
+  <div class="grid grid-4">
+    <div class="metric small">
+      <span class="metric-label">Coverage type</span>
+      <span class="metric-value">{{ result.coverage_type }}</span>
+    </div>
+    <div class="metric small">
+      <span class="metric-label">Confidence</span>
+      <span class="metric-value">{{ (result.confidence * 100)|round(1) }}%</span>
+    </div>
+    <div class="metric small">
+      <span class="metric-label">Payout estimate</span>
+      <span class="metric-value">{{ result.payout_estimate if result.payout_estimate is not none else '-' }} {{ result.currency or '' }}</span>
+    </div>
+    <div class="metric small">
+      <span class="metric-label">Warnings</span>
+      <span class="metric-value">{{ result.warnings|length }}</span>
+    </div>
+  </div>
+  <div class="stack">
+    <div>
+      <h3>Explanation</h3>
+      <p>{{ result.explanation }}</p>
+    </div>
+    <div class="grid grid-2">
+      <div>
+        <h3>Extracted facts</h3>
+        <pre>{{ result.extracted_facts | tojson(indent=2) }}</pre>
+      </div>
+      <div>
+        <h3>Policy summary</h3>
+        <pre>{{ result.policy_assessment_summary | tojson(indent=2) }}</pre>
+      </div>
+    </div>
+  </div>
+</section>
+{% endif %}
+{% endblock %}

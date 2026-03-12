@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="card">
+  <h2>Engineering guide</h2>
+  <p class="lede">Use these pages to understand the system surface, processing flow, module boundaries, decision rules, and QA workflow without reading the entire codebase first.</p>
+  <div class="link-grid docs-grid">
+    <a class="mini-link" href="/guide/architecture"><strong>App & service architecture</strong><span>How the FastAPI shell, internal pages, and stable pipeline fit together.</span></a>
+    <a class="mini-link" href="/guide/pipeline"><strong>Claim processing flow</strong><span>Claim ingestion, OCR, parsing, verification, and decision routing from start to finish.</span></a>
+    <a class="mini-link" href="/guide/modules"><strong>Module map & ownership</strong><span>Which files own intake, orchestration, verification, storage, and QA responsibilities.</span></a>
+    <a class="mini-link" href="/guide/policy"><strong>Decision policy & verification rules</strong><span>How support, contradiction, invalidity, and uncertainty are turned into final decisions.</span></a>
+    <a class="mini-link" href="/guide/results"><strong>Benchmark workflow & QA artifacts</strong><span>How predictions and evaluation outputs are generated, stored, and reviewed.</span></a>
+  </div>
+</section>
+{% endblock %}

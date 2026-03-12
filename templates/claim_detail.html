@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="card">
+  <div class="result-header">
+    <div>
+      <div class="eyebrow">Claim inspection</div>
+      <h2>{{ claim.claim_id }}</h2>
+    </div>
+    <span class="decision-pill decision-{{ claim.decision|lower }}">{{ claim.decision }}</span>
+  </div>
+  <div class="grid grid-4">
+    <div class="metric small"><span class="metric-label">Coverage type</span><span class="metric-value">{{ claim.coverage_type }}</span></div>
+    <div class="metric small"><span class="metric-label">Confidence</span><span class="metric-value">{{ (claim.confidence * 100)|round(1) }}%</span></div>
+    <div class="metric small"><span class="metric-label">Payout estimate</span><span class="metric-value">{{ claim.payout_estimate if claim.payout_estimate is not none else '-' }} {{ claim.currency or '' }}</span></div>
+    <div class="metric small"><span class="metric-label">Warnings</span><span class="metric-value">{{ claim.warnings|length }}</span></div>
+  </div>
+  <div class="stack">
+    <div>
+      <h3>Decision explanation</h3>
+      <p>{{ claim.explanation }}</p>
+    </div>
+    <div class="grid grid-2">
+      <div>
+        <h3>Travel facts</h3>
+        <pre>{{ claim.travel_facts | tojson(indent=2) }}</pre>
+      </div>
+      <div>
+        <h3>Incident facts</h3>
+        <pre>{{ claim.incident_facts | tojson(indent=2) }}</pre>
+      </div>
+    </div>
+    <div class="grid grid-2">
+      <div>
+        <h3>Policy summary</h3>
+        <pre>{{ claim.policy_summary | tojson(indent=2) }}</pre>
+      </div>
+      <div>
+        <h3>Warnings</h3>
+        <pre>{{ claim.warnings | tojson(indent=2) }}</pre>
+      </div>
+    </div>
+    <div>
+      <h3>Documents</h3>
+      <pre>{{ claim.documents | tojson(indent=2) }}</pre>
+    </div>
+    <div>
+      <h3>Document assessments</h3>
+      <pre>{{ claim.document_assessments | tojson(indent=2) }}</pre>
+    </div>
+  </div>
+</section>
+{% endblock %}

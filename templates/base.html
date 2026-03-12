@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ page_title or product_name }}</title>
+    <link rel="icon" type="image/jpeg" href="/static/logo.jpeg" />
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <div class="shell">
+      <aside class="sidebar">
+        <div class="brand">
+          {% if logo_url %}
+          <img class="brand-logo" src="{{ logo_url }}" alt="MarvelX.ai logo" />
+          {% else %}
+          <div class="brand-mark">M</div>
+          {% endif %}
+          <div>
+            <div class="eyebrow">MarvelX.ai</div>
+            <div class="brand-title">Claims Adjudication</div>
+            <div class="brand-subtitle">{{ product_tagline }}</div>
+          </div>
+        </div>
+        <nav class="nav">
+          <a href="/">Overview</a>
+          <a href="/submit">Claim Intake</a>
+          <a href="/claims-ui">Processed Claims{% if processed_claim_count %} <span class="badge">{{ processed_claim_count }}</span>{% endif %}</a>
+          <a href="/qa">Benchmark & QA</a>
+          <div class="nav-section">Engineering Guide</div>
+          <a href="/guide">Guide Home</a>
+          <a href="/guide/architecture">App & Service Architecture</a>
+          <a href="/guide/pipeline">Claim Processing Flow</a>
+          <a href="/guide/modules">Module Map & Ownership</a>
+          <a href="/guide/policy">Decision Policy & Verification Rules</a>
+          <a href="/guide/results">Benchmark Workflow & QA Artifacts</a>
+          <div class="nav-section">API Surface</div>
+          <a href="/docs">Swagger UI</a>
+          <a href="/redoc">ReDoc</a>
+        </nav>
+      </aside>
+      <main class="content">
+        <header class="topbar">
+          <div>
+            <div class="eyebrow">Operations console</div>
+            <h1>{{ page_title or product_name }}</h1>
+          </div>
+          <div class="topbar-actions">
+            <a class="button button-secondary" href="/submit">New claim</a>
+            <a class="button" href="/guide">Open guide</a>
+          </div>
+        </header>
+        {% block content %}{% endblock %}
+      </main>
+    </div>
+  </body>
+</html>
